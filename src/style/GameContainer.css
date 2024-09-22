@@ -5,3 +5,12 @@
     margin-top: 20px;
   }
   
+  /* Style for the "Game not found" message */
+  .no-games {
+    grid-column: span 3; /* Make the message span across all columns */
+    text-align: center;
+    color: #ff4500; /* Customize color */
+    padding: 20px;
+    font-size: 18px;
+  }
+  

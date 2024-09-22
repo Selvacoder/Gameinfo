@@ -1,22 +1,53 @@
+/* GameCard.css */
+
+/* GameCard.css */
+
 .game-card {
-    background-color: #8B4513;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
-  }
-  
-  .game-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .btn-view {
-    background-color: #ffcc00;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
+  border: 1px solid #e0e0e0; /* Slightly lighter gray for better contrast */
+  border-radius: 10px; /* Increased border radius for a softer look */
+  padding: 20px; /* More padding for better content spacing */
+  margin: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  transition: transform 0.3s, box-shadow 0.3s; /* Slightly longer transition for smoother effect */
+  background-color: #ffffff; /* Added a background color for contrast */
+}
+
+.game-card:hover {
+  transform: translateY(-6px); /* Slightly higher lift on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.game-image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px; /* Increased border radius for a smoother edge */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.btn-view {
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Softer corners */
+  padding: 12px 18px; /* Increased padding for better button size */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Added transform for scaling effect */
+  margin-top: 10px;
+  font-weight: bold; /* Bold text for better visibility */
+}
+
+.btn-view:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: scale(1.05); /* Slight scale effect on hover for interactivity */
+}
+
+h3 {
+  margin: 12px 0; /* Increased margin for better spacing */
+  font-size: 1.5em; /* Increased font size for better visibility */
+}
+
+p {
+  color: #666; /* Slightly darker text for better contrast */
+  line-height: 1.5; /* Improved line height for readability */
+}
