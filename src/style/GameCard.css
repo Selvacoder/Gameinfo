@@ -1,0 +1,22 @@
+.game-card {
+    background-color: #8B4513;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+  }
+  
+  .game-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .btn-view {
+    background-color: #ffcc00;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  

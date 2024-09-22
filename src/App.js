@@ -1,40 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-
-const Header = () => (
-  <div className="header">
-    <input type="text" placeholder="Search..." className="search-bar" />
-    <div className="auth-buttons">
-      <button className="btn-signin">Sign In</button>
-      <button className="btn-signup">Sign Up</button>
-    </div>
-  </div>
-);
-
-const GameCard = ({ image, name }) => (
-  <div className="game-card">
-    <img src={image} alt={name} className="game-image" />
-    <h3>{name}</h3>
-    <button className="btn-view">View</button>
-  </div>
-);
+import Header from './components/Header';
+import GameContainer from './components/GameContainer';
+import games from './data/gameData';  // Import game data from external file
 
 function App() {
-  const games = [
-    // Replace these with actual game images and names
-    { id: 1, name: 'Game 1', image: 'game1.jpg' },
-    { id: 2, name: 'Game 2', image: 'game2.jpg' },
-    { id: 3, name: 'Game 3', image: 'game3.jpg' },
-  ];
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter games based on search term
+  const filteredGames = games.filter(game =>
+    game.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="App">
-      <Header />
-      <div className="game-card-container">
-        {games.map(game => (
-          <GameCard key={game.id} {...game} />
-        ))}
-      </div>
+      <Header
+        isSignedIn={isSignedIn}
+        handleSignIn={() => setIsSignedIn(true)}
+        handleSignOut={() => setIsSignedIn(false)}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+
+      <GameContainer games={filteredGames} />
     </div>
   );
 }
