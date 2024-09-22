@@ -1,69 +1,71 @@
-/* Header.css */
-
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f8f9fa; /* Light background for contrast */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  width: 300px; /* Set a smaller width for minimal size */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-signin,
+.btn-signup,
+.btn-signout {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-signin {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-signup {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-signout {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-signin:hover,
+.btn-signup:hover,
+.btn-signout:hover {
+  opacity: 0.9;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .search-bar {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 20px; /* Space between search bar and buttons */
-  }
-  
+
   .auth-buttons {
-    display: flex;
-    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+    width: 100%;
+    justify-content: space-between;
   }
-  
-  .btn-signin,
-  .btn-signup,
-  .btn-signout {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  .search-bar {
+    width: 100%; /* Full width for search bar on small screens */
+    margin-top: 10px;
   }
-  
-  .btn-signin {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .btn-signup {
-    background-color: #28a745; /* Green for sign up */
-    color: white;
-  }
-  
-  .btn-signout {
-    background-color: #dc3545; /* Red for sign out */
-    color: white;
-  }
-  
-  .btn-signin:hover,
-  .btn-signup:hover,
-  .btn-signout:hover {
-    opacity: 0.9; /* Slightly reduce opacity on hover */
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 600px) {
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .auth-buttons {
-      margin-top: 10px;
-      width: 100%; /* Full width for buttons on small screens */
-      justify-content: space-between;
-    }
-  }
-  
+}

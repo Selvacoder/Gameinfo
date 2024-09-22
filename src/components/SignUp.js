@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Auth.css'; // Import the CSS
 
-const SignIn = ({ handleSignIn }) => {
+const SignUp = ({ handleSignIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); // Hook for navigation
@@ -10,13 +10,13 @@ const SignIn = ({ handleSignIn }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSignIn();
-    navigate('/'); // Redirect to home page after successful sign-in
+    navigate('/'); // Redirect to home page after successful sign-up
   };
 
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>Sign In</h2>
+        <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -30,12 +30,12 @@ const SignIn = ({ handleSignIn }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Sign In</button>
+          <button type="submit">Sign Up</button>
         </form>
-        <a href="/signup" className="auth-link">Don't have an account? Sign Up</a>
+        <a href="/signin" className="auth-link">Already have an account? Sign In</a>
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;
