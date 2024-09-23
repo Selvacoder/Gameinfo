@@ -49,6 +49,7 @@ const games = [
   { id: '49', name: 'Spiritfarer', description: 'A cozy management game about dying and helping spirits pass on.', image: 'https://example.com/spiritfarer.jpg' },
   { id: '50', name: 'Little Nightmares II', description: 'A horror puzzle-platformer that is both eerie and captivating.', image: 'https://example.com/littlenightmares2.jpg' },
   { id: '51', name: 'Kena: Bridge of Spirits', description: 'An action-adventure game featuring stunning visuals and emotional storytelling.', image: 'https://example.com/kena.jpg' },
+  { id: '52', name: 'Black Myth Wukong', description: '', image: 'https://example.com/blackmythwukong.jpg'},
 ];
 
 export default games;
