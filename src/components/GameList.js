@@ -1,54 +1,56 @@
-import React, { useState } from 'react';
-import GameCard from './GameCard'; // Ensure correct import path
+import React, { useEffect, useState } from 'react';
+import GameCard from './GameCard'; // Adjust import path as needed
 
-const GameList = ({ games }) => {
-    const [currentPage, setCurrentPage] = useState(0);
-    const gamesPerPage = 15;
+const GameList = () => {
+  const [games, setGames] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const totalPages = Math.ceil(games.length / gamesPerPage);
-    
-    const handleNext = () => {
-        if (currentPage < totalPages - 1) {
-            setCurrentPage(currentPage + 1);
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const response = await fetch('/api/games'); // Check your API endpoint
+        if (!response.ok) {
+          throw new Error('Failed to fetch games');
         }
+        const data = await response.json();
+        console.log('Fetched games:', data); // Debug log
+        setGames(data); // Set the fetched data
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    const handlePrevious = () => {
-        if (currentPage > 0) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
+    fetchGames(); // Call the fetch function
+  }, []);
 
-    const currentGames = games.slice(currentPage * gamesPerPage, (currentPage + 1) * gamesPerPage);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    return (
-        <div>
-            <h1>Game List</h1>
-            <div className="game-list">
-                {currentGames.length > 0 ? (
-                    currentGames.map(game => (
-                        <GameCard
-                            key={game.id}
-                            id={game.id}
-                            name={game.name}
-                            description={game.description}
-                            image={game.image}
-                        />
-                    ))
-                ) : (
-                    <p>No games found.</p>
-                )}
-            </div>
-            <div>
-                <button onClick={handlePrevious} disabled={currentPage === 0}>
-                    Previous
-                </button>
-                <button onClick={handleNext} disabled={currentPage === totalPages - 1}>
-                    Next
-                </button>
-            </div>
-        </div>
-    );
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div className="game-list">
+      {games.length > 0 ? (
+        games.map(game => (
+          <GameCard
+            key={game.id}
+            id={game.id}
+            name={game.name}
+            description={game.description}
+            image={game.image}
+          />
+        ))
+      ) : (
+        <p>No games found.</p>
+      )}
+    </div>
+  );
 };
 
 export default GameList;

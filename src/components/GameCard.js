@@ -9,9 +9,11 @@ const GameCard = ({ name, description, image, id }) => {
     navigate(`/games/${id}`); // Navigate to the game details page
   };
 
+  const placeholderImage = 'https://via.placeholder.com/150'; // Example placeholder
+
   return (
     <div className="game-card">
-      <img src={image} alt={name} className="game-image" />
+      <img src={image || placeholderImage} alt={name} className="game-image" />
       <h3>{name}</h3>
       <p>{description}</p>
       <button className="btn-view" onClick={handleViewClick}>

@@ -5,19 +5,22 @@ import GameContainer from './components/GameContainer';
 import GameDetail from './components/GameDetail';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import games from './data/gameData';
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [genre, setGenre] = useState('');
+  const [developer, setDeveloper] = useState('');
+  const [publisher, setPublisher] = useState('');
+  const [ratingRange, setRatingRange] = useState({ min: '', max: '' });
+
+  // Example arrays for genres, developers, and publishers
+  const genres = ['Action', 'Adventure', 'RPG', 'Strategy']; // Update this based on your data
+  const developers = ['Dev A', 'Dev B', 'Dev C']; // Update this based on your data
+  const publishers = ['Publisher A', 'Publisher B', 'Publisher C']; // Update this based on your data
 
   const handleSignIn = () => setIsSignedIn(true);
   const handleSignOut = () => setIsSignedIn(false);
-
-  // Filter games based on search term
-  const filteredGames = games.filter(game =>
-    game.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <Router>
@@ -28,19 +31,24 @@ function App() {
           handleSignOut={handleSignOut}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          genres={genres}
+          setGenre={setGenre}
+          developers={developers}
+          setDeveloper={setDeveloper}
+          publishers={publishers}
+          setPublisher={setPublisher}
+          ratingRange={ratingRange}
+          setRatingRange={setRatingRange}
         />
 
         <Routes>
-          <Route 
-            path="/" 
-            element={<GameContainer 
-            games={filteredGames} 
-            isLoading={false} 
-            error={null} 
-            searchTerm={searchTerm} // Ensure this is passed correctly
-            />}
-          />
-          <Route path="/" element={<GameContainer games={games} searchTerm={searchTerm} />} />
+          <Route path="/" element={<GameContainer 
+            searchTerm={searchTerm} 
+            genre={genre} 
+            developer={developer} 
+            publisher={publisher} 
+            ratingRange={ratingRange} 
+          />} />
           <Route path="/games/:id" element={<GameDetail />} />
           <Route path="/signin" element={<SignIn handleSignIn={handleSignIn} />} />
           <Route path="/signup" element={<SignUp handleSignIn={handleSignIn} />} />
@@ -51,10 +59,8 @@ function App() {
 }
 
 // Wrapper for the Header that hides it on the SignIn, SignUp, and GameDetail pages
-const HeaderWrapper = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, setSearchTerm }) => {
+const HeaderWrapper = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, setSearchTerm, genres, setGenre, developers, setDeveloper, publishers, setPublisher, ratingRange, setRatingRange }) => {
   const location = useLocation();
-
-  // Conditionally hide the header on the SignIn, SignUp, and GameDetail pages
   const hideHeaderRoutes = ['/signin', '/signup', '/games/'];
   const isOnGameDetail = location.pathname.startsWith('/games/');
   const showHeader = !hideHeaderRoutes.includes(location.pathname) && !isOnGameDetail;
@@ -66,6 +72,14 @@ const HeaderWrapper = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, se
       handleSignOut={handleSignOut}
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
+      genres={genres}
+      setGenre={setGenre}
+      developers={developers}
+      setDeveloper={setDeveloper}
+      publishers={publishers}
+      setPublisher={setPublisher}
+      ratingRange={ratingRange}
+      setRatingRange={setRatingRange}
     />
   ) : null;
 };
