@@ -8,10 +8,10 @@
 }
 
 .search-bar {
-  width: 300px; /* Set a smaller width for minimal size */
-  padding: 8px;
+  width: 500px; /* Set a smaller width for minimal size */
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   margin-right: 20px;
 }
 

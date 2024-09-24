@@ -1,10 +1,13 @@
+/* Game card container */
 .game-card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
   gap: 20px; /* Space between cards */
   margin-top: 20px; /* Space above the grid */
+  margin-bottom: 60px; /* Add some space at the bottom for pagination */
 }
-  /* Style for the "Game not found" message */
+
+/* Style for the "Game not found" message */
 .no-games {
   grid-column: span 3; /* Make the message span across all columns */
   text-align: center;
@@ -12,22 +15,30 @@
   padding: 20px;
   font-size: 18px;
 }
+
+/* Pagination controls */
 .pagination-controls {
   display: flex;
   justify-content: center; /* Center the buttons horizontally */
   margin-top: 20px; /* Space above the buttons */
+  position:fixed;
+  bottom: 20px; /* Stick buttons to the bottom */
+  left: 0;
+  right: 0;
 }
 
+/* Pagination buttons */
 .pagination-controls button {
   padding: 10px 15px; /* Increase padding for better touch area */
   margin: 0 10px; /* Space between buttons */
   border: none; /* Remove default border */
   border-radius: 5px; /* Rounded corners */
   background-color: #007bff; /* Primary color */
-  color: white; /* Text color */
+  color: rgb(253, 253, 253); /* Text color */
   font-size: 16px; /* Increase font size for better readability */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  
 }
 
 .pagination-controls button:hover {
@@ -39,4 +50,3 @@
   background-color: #ccc; /* Gray out disabled buttons */
   cursor: not-allowed; /* Not-allowed cursor */
 }
-
