@@ -8,7 +8,7 @@
 }
 
 .search-bar {
-  width: 500px; /* Set a smaller width for minimal size */
+  width: 499px; /* Set a smaller width for minimal size */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
