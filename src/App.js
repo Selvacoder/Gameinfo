@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import GameContainer from './components/GameContainer';
 import GameDetail from './components/GameDetail';
@@ -15,7 +15,6 @@ function App() {
   const [ratingRange, setRatingRange] = useState({ min: '', max: '' });
 
   // Temporary states for filters
-  const [tempSearchTerm, setTempSearchTerm] = useState('');
   const [tempGenre, setTempGenre] = useState('');
   const [tempDeveloper, setTempDeveloper] = useState('');
   const [tempPublisher, setTempPublisher] = useState('');
@@ -29,8 +28,6 @@ function App() {
   const handleSignOut = () => setIsSignedIn(false);
 
   const applyFilters = () => {
-    // Update main state with temporary values
-    setSearchTerm(tempSearchTerm);
     setGenre(tempGenre);
     setDeveloper(tempDeveloper);
     setPublisher(tempPublisher);
@@ -38,7 +35,7 @@ function App() {
     
     // Log applied filters
     console.log('Filters applied:', {
-      searchTerm: tempSearchTerm,
+      searchTerm,
       genre: tempGenre,
       developer: tempDeveloper,
       publisher: tempPublisher,
@@ -49,24 +46,24 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <HeaderWrapper
+        <Header
           isSignedIn={isSignedIn}
           handleSignIn={handleSignIn}
           handleSignOut={handleSignOut}
-          tempSearchTerm={tempSearchTerm} // Pass tempSearchTerm
-          setTempSearchTerm={setTempSearchTerm} // Pass setter for tempSearchTerm
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
           genres={genres}
-          tempGenre={tempGenre} // Pass tempGenre
-          setTempGenre={setTempGenre} // Pass setter for tempGenre
+          tempGenre={tempGenre}
+          setTempGenre={setTempGenre}
           developers={developers}
-          tempDeveloper={tempDeveloper} // Pass tempDeveloper
-          setTempDeveloper={setTempDeveloper} // Pass setter for tempDeveloper
+          tempDeveloper={tempDeveloper}
+          setTempDeveloper={setTempDeveloper}
           publishers={publishers}
-          tempPublisher={tempPublisher} // Pass tempPublisher
-          setTempPublisher={setTempPublisher} // Pass setter for tempPublisher
-          tempRatingRange={tempRatingRange} // Pass tempRatingRange
-          setTempRatingRange={setTempRatingRange} // Pass setter for tempRatingRange
-          applyFilters={applyFilters} // Pass applyFilters function
+          tempPublisher={tempPublisher}
+          setTempPublisher={setTempPublisher}
+          tempRatingRange={tempRatingRange}
+          setTempRatingRange={setTempRatingRange}
+          applyFilters={applyFilters}
         />
 
         <Routes>
@@ -85,53 +82,5 @@ function App() {
     </Router>
   );
 }
-
-// Wrapper for the Header that hides it on the SignIn, SignUp, and GameDetail pages
-const HeaderWrapper = ({ 
-  isSignedIn, 
-  handleSignIn, 
-  handleSignOut, 
-  tempSearchTerm, 
-  setTempSearchTerm, 
-  genres, 
-  tempGenre, 
-  setTempGenre, 
-  developers, 
-  tempDeveloper, 
-  setTempDeveloper, 
-  publishers, 
-  tempPublisher, 
-  setTempPublisher, 
-  tempRatingRange, 
-  setTempRatingRange, 
-  applyFilters 
-}) => {
-  const location = useLocation();
-  const hideHeaderRoutes = ['/signin', '/signup', '/games/'];
-  const isOnGameDetail = location.pathname.startsWith('/games/');
-  const showHeader = !hideHeaderRoutes.includes(location.pathname) && !isOnGameDetail;
-
-  return showHeader ? (
-    <Header
-      isSignedIn={isSignedIn}
-      handleSignIn={handleSignIn}
-      handleSignOut={handleSignOut}
-      tempSearchTerm={tempSearchTerm} // Pass tempSearchTerm
-      setTempSearchTerm={setTempSearchTerm} // Pass setter for tempSearchTerm
-      genres={genres}
-      tempGenre={tempGenre} // Pass tempGenre
-      setTempGenre={setTempGenre} // Pass setter for tempGenre
-      developers={developers}
-      tempDeveloper={tempDeveloper} // Pass tempDeveloper
-      setTempDeveloper={setTempDeveloper} // Pass setter for tempDeveloper
-      publishers={publishers}
-      tempPublisher={tempPublisher} // Pass tempPublisher
-      setTempPublisher={setTempPublisher} // Pass setter for tempPublisher
-      tempRatingRange={tempRatingRange} // Pass tempRatingRange
-      setTempRatingRange={setTempRatingRange} // Pass setter for tempRatingRange
-      applyFilters={applyFilters} // Pass down the applyFilters function
-    />
-  ) : null;
-};
 
 export default App;

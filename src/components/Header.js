@@ -7,8 +7,6 @@ const Header = ({
   isSignedIn, 
   handleSignIn, 
   handleSignOut, 
-  tempSearchTerm, 
-  setTempSearchTerm, 
   genres, 
   tempGenre, 
   setTempGenre, 
@@ -20,7 +18,9 @@ const Header = ({
   setTempPublisher, 
   tempRatingRange, 
   setTempRatingRange,
-  applyFilters 
+  applyFilters,
+  searchTerm,
+  setSearchTerm
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,10 +51,10 @@ const Header = ({
       <input
         type="text"
         placeholder="Search..."
-        value={tempSearchTerm} // Use temporary search term
-        onChange={(e) => setTempSearchTerm(e.target.value)} // Update temporary search term
         className="search-bar"
         aria-label="Search games"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Update search term directly
       />
 
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
@@ -62,16 +62,16 @@ const Header = ({
         
         <Filter 
           genres={genres}
-          tempGenre={tempGenre} // Use temporary genre
-          setTempGenre={setTempGenre} // Pass setter for temporary genre
+          tempGenre={tempGenre}
+          setTempGenre={setTempGenre}
           developers={developers}
-          tempDeveloper={tempDeveloper} // Use temporary developer
-          setTempDeveloper={setTempDeveloper} // Pass setter for temporary developer
+          tempDeveloper={tempDeveloper}
+          setTempDeveloper={setTempDeveloper}
           publishers={publishers}
-          tempPublisher={tempPublisher} // Use temporary publisher
-          setTempPublisher={setTempPublisher} // Pass setter for temporary publisher
-          tempRatingRange={tempRatingRange} // Use temporary rating range
-          setTempRatingRange={setTempRatingRange} // Pass setter for temporary rating range
+          tempPublisher={tempPublisher}
+          setTempPublisher={setTempPublisher}
+          tempRatingRange={tempRatingRange}
+          setTempRatingRange={setTempRatingRange}
           onApplyFilters={onApplyFilters} // Pass down the function
         />
       </div>

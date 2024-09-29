@@ -20,7 +20,7 @@ const Filter = ({
       <h2 className="filter-title">Filters</h2>
       <div className="filter-group">
         <h3>Genre</h3>
-        <select className="filter" value={tempGenre} onChange={(e) => setTempGenre(e.target.value)}>
+        <select value={tempGenre} onChange={(e) => setTempGenre(e.target.value)}>
           <option value="">Select Genre</option>
           {genres.map((genre) => (
             <option key={genre} value={genre}>{genre}</option>
@@ -29,7 +29,7 @@ const Filter = ({
       </div>
       <div className="filter-group">
         <h3>Developer</h3>
-        <select className="filter" value={tempDeveloper} onChange={(e) => setTempDeveloper(e.target.value)}>
+        <select value={tempDeveloper} onChange={(e) => setTempDeveloper(e.target.value)}>
           <option value="">Select Developer</option>
           {developers.map((dev) => (
             <option key={dev} value={dev}>{dev}</option>
@@ -38,7 +38,7 @@ const Filter = ({
       </div>
       <div className="filter-group">
         <h3>Publisher</h3>
-        <select className="filter" value={tempPublisher} onChange={(e) => setTempPublisher(e.target.value)}>
+        <select value={tempPublisher} onChange={(e) => setTempPublisher(e.target.value)}>
           <option value="">Select Publisher</option>
           {publishers.map((pub) => (
             <option key={pub} value={pub}>{pub}</option>
