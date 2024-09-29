@@ -1,79 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Header.css';
+import Filter from './Filter';
 
-const Header = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, setSearchTerm, genres, setGenre, developers, setDeveloper, publishers, setPublisher, ratingRange, setRatingRange }) => {
+const Header = ({ 
+  isSignedIn, 
+  handleSignIn, 
+  handleSignOut, 
+  tempSearchTerm, 
+  setTempSearchTerm, 
+  genres, 
+  tempGenre, 
+  setTempGenre, 
+  developers, 
+  tempDeveloper, 
+  setTempDeveloper, 
+  publishers, 
+  tempPublisher, 
+  setTempPublisher, 
+  tempRatingRange, 
+  setTempRatingRange,
+  applyFilters 
+}) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSignInClick = () => {
-    navigate('/signin'); // Navigate to the Sign In page
+    navigate('/signin');
   };
 
   const handleSignUpClick = () => {
-    navigate('/signup'); // Navigate to the Sign Up page
+    navigate('/signup');
   };
 
-  const handleMenuClick = () => {
-    // Functionality for menu button can be implemented here
-    console.log("Menu button clicked");
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
+  const onApplyFilters = () => {
+    applyFilters(); // Call applyFilters to update the main states
+    setIsSidebarOpen(false); // Close the sidebar after applying filters
   };
 
   return (
     <div className="header">
-      <button className="btn-menu" onClick={handleMenuClick} aria-label="Menu">
-        ☰ {/* Menu icon, can be replaced with an icon from a library */}
+      <button className="btn-menu" onClick={toggleSidebar} aria-label="Menu">
+        ☰ 
       </button>
 
       <input
         type="text"
         placeholder="Search..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={tempSearchTerm} // Use temporary search term
+        onChange={(e) => setTempSearchTerm(e.target.value)} // Update temporary search term
         className="search-bar"
         aria-label="Search games"
       />
 
-      {/* Filter by Genre */}
-      <select onChange={(e) => setGenre(e.target.value)} className="filter" aria-label="Select genre">
-        <option value="">Select Genre</option>
-        {genres.map((genre) => (
-          <option key={genre} value={genre}>{genre}</option>
-        ))}
-      </select>
-
-      {/* Filter by Developer */}
-      <select onChange={(e) => setDeveloper(e.target.value)} className="filter" aria-label="Select developer">
-        <option value="">Select Developer</option>
-        {developers.map((developer) => (
-          <option key={developer} value={developer}>{developer}</option>
-        ))}
-      </select>
-
-      {/* Filter by Publisher */}
-      <select onChange={(e) => setPublisher(e.target.value)} className="filter" aria-label="Select publisher">
-        <option value="">Select Publisher</option>
-        {publishers.map((publisher) => (
-          <option key={publisher} value={publisher}>{publisher}</option>
-        ))}
-      </select>
-
-      {/* Filter by Rating Range */}
-      <input
-        type="number"
-        placeholder="Min Rating"
-        value={ratingRange.min}
-        onChange={(e) => setRatingRange({ ...ratingRange, min: e.target.value })}
-        className="filter"
-        aria-label="Minimum rating"
-      />
-      <input
-        type="number"
-        placeholder="Max Rating"
-        value={ratingRange.max}
-        onChange={(e) => setRatingRange({ ...ratingRange, max: e.target.value })}
-        className="filter"
-        aria-label="Maximum rating"
-      />
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <button className="btn-close" onClick={toggleSidebar} aria-label="Close Menu">✖</button>
+        
+        <Filter 
+          genres={genres}
+          tempGenre={tempGenre} // Use temporary genre
+          setTempGenre={setTempGenre} // Pass setter for temporary genre
+          developers={developers}
+          tempDeveloper={tempDeveloper} // Use temporary developer
+          setTempDeveloper={setTempDeveloper} // Pass setter for temporary developer
+          publishers={publishers}
+          tempPublisher={tempPublisher} // Use temporary publisher
+          setTempPublisher={setTempPublisher} // Pass setter for temporary publisher
+          tempRatingRange={tempRatingRange} // Use temporary rating range
+          setTempRatingRange={setTempRatingRange} // Pass setter for temporary rating range
+          onApplyFilters={onApplyFilters} // Pass down the function
+        />
+      </div>
 
       <div className="auth-buttons">
         {isSignedIn ? (

@@ -84,7 +84,7 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
         <button onClick={handlePrevious} disabled={currentPage === 0}>
           Previous
         </button>
-        <button onClick={handleNext} disabled={currentPage === totalPages - 1}>
+        <button onClick={handleNext} disabled={currentPage === totalPages - 1 }>
           Next
         </button>
       </div>

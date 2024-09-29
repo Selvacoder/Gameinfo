@@ -14,13 +14,37 @@ function App() {
   const [publisher, setPublisher] = useState('');
   const [ratingRange, setRatingRange] = useState({ min: '', max: '' });
 
-  // Example arrays for genres, developers, and publishers
-  const genres = ['Action', 'Adventure', 'RPG', 'Strategy']; // Update this based on your data
-  const developers = ['Dev A', 'Dev B', 'Dev C']; // Update this based on your data
-  const publishers = ['Publisher A', 'Publisher B', 'Publisher C']; // Update this based on your data
+  // Temporary states for filters
+  const [tempSearchTerm, setTempSearchTerm] = useState('');
+  const [tempGenre, setTempGenre] = useState('');
+  const [tempDeveloper, setTempDeveloper] = useState('');
+  const [tempPublisher, setTempPublisher] = useState('');
+  const [tempRatingRange, setTempRatingRange] = useState({ min: '', max: '' });
+
+  const genres = ['Action', 'Adventure', 'RPG', 'Strategy'];
+  const developers = ['Dev A', 'Dev B', 'Dev C'];
+  const publishers = ['Publisher A', 'Publisher B', 'Publisher C'];
 
   const handleSignIn = () => setIsSignedIn(true);
   const handleSignOut = () => setIsSignedIn(false);
+
+  const applyFilters = () => {
+    // Update main state with temporary values
+    setSearchTerm(tempSearchTerm);
+    setGenre(tempGenre);
+    setDeveloper(tempDeveloper);
+    setPublisher(tempPublisher);
+    setRatingRange(tempRatingRange);
+    
+    // Log applied filters
+    console.log('Filters applied:', {
+      searchTerm: tempSearchTerm,
+      genre: tempGenre,
+      developer: tempDeveloper,
+      publisher: tempPublisher,
+      ratingRange: tempRatingRange,
+    });
+  };
 
   return (
     <Router>
@@ -29,16 +53,20 @@ function App() {
           isSignedIn={isSignedIn}
           handleSignIn={handleSignIn}
           handleSignOut={handleSignOut}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
+          tempSearchTerm={tempSearchTerm} // Pass tempSearchTerm
+          setTempSearchTerm={setTempSearchTerm} // Pass setter for tempSearchTerm
           genres={genres}
-          setGenre={setGenre}
+          tempGenre={tempGenre} // Pass tempGenre
+          setTempGenre={setTempGenre} // Pass setter for tempGenre
           developers={developers}
-          setDeveloper={setDeveloper}
+          tempDeveloper={tempDeveloper} // Pass tempDeveloper
+          setTempDeveloper={setTempDeveloper} // Pass setter for tempDeveloper
           publishers={publishers}
-          setPublisher={setPublisher}
-          ratingRange={ratingRange}
-          setRatingRange={setRatingRange}
+          tempPublisher={tempPublisher} // Pass tempPublisher
+          setTempPublisher={setTempPublisher} // Pass setter for tempPublisher
+          tempRatingRange={tempRatingRange} // Pass tempRatingRange
+          setTempRatingRange={setTempRatingRange} // Pass setter for tempRatingRange
+          applyFilters={applyFilters} // Pass applyFilters function
         />
 
         <Routes>
@@ -59,7 +87,25 @@ function App() {
 }
 
 // Wrapper for the Header that hides it on the SignIn, SignUp, and GameDetail pages
-const HeaderWrapper = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, setSearchTerm, genres, setGenre, developers, setDeveloper, publishers, setPublisher, ratingRange, setRatingRange }) => {
+const HeaderWrapper = ({ 
+  isSignedIn, 
+  handleSignIn, 
+  handleSignOut, 
+  tempSearchTerm, 
+  setTempSearchTerm, 
+  genres, 
+  tempGenre, 
+  setTempGenre, 
+  developers, 
+  tempDeveloper, 
+  setTempDeveloper, 
+  publishers, 
+  tempPublisher, 
+  setTempPublisher, 
+  tempRatingRange, 
+  setTempRatingRange, 
+  applyFilters 
+}) => {
   const location = useLocation();
   const hideHeaderRoutes = ['/signin', '/signup', '/games/'];
   const isOnGameDetail = location.pathname.startsWith('/games/');
@@ -70,16 +116,20 @@ const HeaderWrapper = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, se
       isSignedIn={isSignedIn}
       handleSignIn={handleSignIn}
       handleSignOut={handleSignOut}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
+      tempSearchTerm={tempSearchTerm} // Pass tempSearchTerm
+      setTempSearchTerm={setTempSearchTerm} // Pass setter for tempSearchTerm
       genres={genres}
-      setGenre={setGenre}
+      tempGenre={tempGenre} // Pass tempGenre
+      setTempGenre={setTempGenre} // Pass setter for tempGenre
       developers={developers}
-      setDeveloper={setDeveloper}
+      tempDeveloper={tempDeveloper} // Pass tempDeveloper
+      setTempDeveloper={setTempDeveloper} // Pass setter for tempDeveloper
       publishers={publishers}
-      setPublisher={setPublisher}
-      ratingRange={ratingRange}
-      setRatingRange={setRatingRange}
+      tempPublisher={tempPublisher} // Pass tempPublisher
+      setTempPublisher={setTempPublisher} // Pass setter for tempPublisher
+      tempRatingRange={tempRatingRange} // Pass tempRatingRange
+      setTempRatingRange={setTempRatingRange} // Pass setter for tempRatingRange
+      applyFilters={applyFilters} // Pass down the applyFilters function
     />
   ) : null;
 };

@@ -1,23 +1,47 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Keep space between left and right sections */
   align-items: center;
   padding: 10px 20px;
   background-color: #f8f9fa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.btn-menu {
+  background-color: #007bff; /* Button color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px; /* Padding */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Transition effect */
+  margin-right: 20px; /* Space between menu button and search bar */
+}
+
+.btn-menu:hover {
+  background-color: #0056b3; /* Darker shade on hover */
 }
 
 .search-bar {
-  width: 300px; /* Set a smaller width for minimal size */
+  width: 300px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 20px;
+  margin-right: 20px; /* Space between search bar and auth buttons */
+  transition: border-color 0.3s;
+}
+
+.search-bar:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 .auth-buttons {
   display: flex;
   gap: 10px;
+  margin-left: auto; /* Pushes the auth buttons to the right */
 }
 
 .btn-signin,
@@ -27,7 +51,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-signin {
@@ -49,24 +73,122 @@
 .btn-signup:hover,
 .btn-signout:hover {
   opacity: 0.9;
+  transform: scale(1.05);
 }
 
-/* Responsive styles */
-@media (max-width: 600px) {
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 250px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: left 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto; /* Enable scrolling if content exceeds height */
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Filter styles */
+.filter-container {
+  margin-top: 20px; /* Spacing above the filter section */
+}
+
+.filter-title {
+  font-size: 20px; /* Title font size */
+  margin-bottom: 15px; /* Spacing below title */
+  color: #333; /* Title color */
+}
+
+.filter {
+  width: 100%; /* Full width for select and input elements */
+  padding: 12px; /* Increased padding for better touch target */
+  margin-bottom: 20px; /* Spacing between inputs */
+  border: 1px solid #ccc; /* Border for select and input elements */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px; /* Increased font size for readability */
+  transition: border-color 0.3s; /* Transition effect for border color */
+}
+
+/* Change border color on focus */
+.filter:focus {
+  border-color: #007bff; /* Highlight border color when focused */
+  outline: none; /* Remove default outline */
+}
+
+/* Rating Range styles */
+.rating-range {
+  display: flex; /* Flexbox for rating inputs */
+  justify-content: space-between; /* Space between inputs */
+}
+
+.rating-range input {
+  width: 48%; /* Slightly less than half to fit side by side */
+  margin-bottom: 15px; /* Spacing below inputs */
+}
+
+/* Styles for the Apply button */
+.btn-apply {
+  background-color: #007bff; /* Button color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 12px 20px; /* Increased padding for better touch target */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+  margin-top: 15px; /* Space above button */
+  width: 100%; /* Full width for the button */
+}
+
+/* Darker shade on hover */
+.btn-apply:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
   .header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .auth-buttons {
-    margin-top: 10px;
+  .search-bar {
     width: 100%;
-    justify-content: space-between;
+    margin-top: 10px;
   }
 
-  .search-bar {
-    width: 100%; /* Full width for search bar on small screens */
-    margin-top: 10px;
+  .sidebar {
+    width: 70%;
   }
 }
 
+@media (max-width: 480px) {
+  .header {
+    padding: 10px;
+  }
+
+  .btn-signin,
+  .btn-signup,
+  .btn-signout {
+    padding: 8px 12px;
+  }
+
+  .search-bar {
+    font-size: 14px;
+  }
+}
