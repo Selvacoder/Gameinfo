@@ -1,6 +1,7 @@
+// App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
+import Layout from './components/Layout'; // Import the Layout component
 import GameContainer from './components/GameContainer';
 import GameDetail from './components/GameDetail';
 import SignIn from './components/SignIn';
@@ -45,8 +46,8 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Header
+      <Routes>
+        <Route path="/" element={<Layout 
           isSignedIn={isSignedIn}
           handleSignIn={handleSignIn}
           handleSignOut={handleSignOut}
@@ -64,10 +65,8 @@ function App() {
           tempRatingRange={tempRatingRange}
           setTempRatingRange={setTempRatingRange}
           applyFilters={applyFilters}
-        />
-
-        <Routes>
-          <Route path="/" element={<GameContainer 
+        />}>
+          <Route index element={<GameContainer 
             searchTerm={searchTerm} 
             genre={genre} 
             developer={developer} 
@@ -77,8 +76,8 @@ function App() {
           <Route path="/games/:id" element={<GameDetail />} />
           <Route path="/signin" element={<SignIn handleSignIn={handleSignIn} />} />
           <Route path="/signup" element={<SignUp handleSignIn={handleSignIn} />} />
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </Router>
   );
 }

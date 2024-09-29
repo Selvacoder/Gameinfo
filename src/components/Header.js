@@ -44,7 +44,12 @@ const Header = ({
 
   return (
     <div className="header">
-      <button className="btn-menu" onClick={toggleSidebar} aria-label="Menu">
+      <button 
+        className="btn-menu" 
+        onClick={toggleSidebar} 
+        aria-label="Menu" 
+        aria-expanded={isSidebarOpen} // Added for accessibility
+      >
         ☰ 
       </button>
 

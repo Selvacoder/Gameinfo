@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between; /* Keep space between left and right sections */
-  align-items: center;
+  align-items: center; /* This centers items vertically */
   padding: 10px 20px;
   background-color: #f8f9fa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -25,11 +25,12 @@
 }
 
 .search-bar {
-  width: 300px;
+  flex-grow: 1; /* Allow search bar to grow and take available space */
+  max-width: 400px; /* Set a maximum width for the search bar */
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 20px; /* Space between search bar and auth buttons */
+  margin: 0 20px; /* Add equal margins on left and right */
   transition: border-color 0.3s;
 }
 
@@ -104,16 +105,6 @@
 }
 
 /* Filter styles */
-.filter-container {
-  margin-top: 20px; /* Spacing above the filter section */
-}
-
-.filter-title {
-  font-size: 20px; /* Title font size */
-  margin-bottom: 15px; /* Spacing below title */
-  color: #333; /* Title color */
-}
-
 .filter {
   width: 100%; /* Full width for select and input elements */
   padding: 12px; /* Increased padding for better touch target */
@@ -128,17 +119,6 @@
 .filter:focus {
   border-color: #007bff; /* Highlight border color when focused */
   outline: none; /* Remove default outline */
-}
-
-/* Rating Range styles */
-.rating-range {
-  display: flex; /* Flexbox for rating inputs */
-  justify-content: space-between; /* Space between inputs */
-}
-
-.rating-range input {
-  width: 48%; /* Slightly less than half to fit side by side */
-  margin-bottom: 15px; /* Spacing below inputs */
 }
 
 /* Styles for the Apply button */
@@ -158,6 +138,13 @@
 .btn-apply:hover {
   background-color: #0056b3; /* Darker shade on hover */
   transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Filter header styles */
+.filter h3 {
+  margin-bottom: 15px; /* Space below the header */
+  font-size: 20px; /* Increased font size for header */
+  color: #333; /* Darker color for better readability */
 }
 
 /* Media Queries for Responsive Design */
