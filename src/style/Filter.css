@@ -17,19 +17,30 @@
     margin-bottom: 15px; /* Reduced spacing between filter groups */
   }
   
-  .filter {
-    width: 100%; /* Full width for select elements */
-    padding: 8px; /* Reduced padding for select inputs */
-    margin-top: 5px; /* Spacing above select inputs */
-    border: 1px solid #ccc; /* Border for select inputs */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Reduced font size for select inputs */
-    transition: border-color 0.3s; /* Transition effect */
+  .filter-group h3 {
+    font-size: 16px; /* Smaller font size for filter group titles */
+    margin-bottom: 5px; /* Reduced margin below group titles */
+    color: #555; /* Lighter color for group titles */
   }
   
-  /* Change border color on focus */
-  .filter:focus {
-    border-color: #007bff; /* Highlight border color when focused */
+  .filter-group select,
+  .filter-rating-input {
+    width: 100%; /* Full width for inputs */
+    padding: 8px; /* Reduced padding */
+    margin-top: 5px; /* Spacing above inputs */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Reduced font size */
+    transition: border-color 0.3s; /* Smooth transition on focus */
+  }
+  
+  .filter-rating-input {
+    width: 48%; /* Slightly less than half to fit side by side */
+  }
+  
+  .filter-group select:focus,
+  .filter-rating-input:focus {
+    border-color: #007bff; /* Blue border on focus */
     outline: none; /* Remove default outline */
   }
   
@@ -38,27 +49,19 @@
     justify-content: space-between; /* Space between inputs */
   }
   
-  .filter-rating-input {
-    width: 48%; /* Slightly less than half to fit side by side */
-    padding: 8px; /* Reduced padding for rating inputs */
-    border: 1px solid #ccc; /* Border for rating inputs */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Reduced font size for rating inputs */
-  }
-  
   .btn-apply {
-    background-color: #007bff; /* Button color */
+    background-color: #007bff; /* Primary button color */
     color: white; /* Text color */
     border: none; /* No border */
     border-radius: 4px; /* Rounded corners */
-    padding: 8px 12px; /* Reduced padding for button */
+    padding: 10px; /* Button padding */
     cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s; /* Transition effect */
-    width: 100%; /* Full width for the button */
-    font-size: 14px; /* Reduced font size for the button */
+    transition: background-color 0.3s ease-in-out; /* Smooth hover effect */
+    width: 100%; /* Full width button */
+    font-size: 14px; /* Button font size */
   }
   
   .btn-apply:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3; /* Darker blue on hover */
   }
   
