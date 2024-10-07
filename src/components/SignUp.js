@@ -56,9 +56,8 @@ const SignUp = ({ handleSignIn }) => {
           <button className="sign" type="submit">Sign Up</button>
         </form>
         <div className="social-auth">
-          <button onClick={() => handleSocialSignIn('Google')}>Sign Up with Google</button>
-          <button onClick={() => handleSocialSignIn('Facebook')}>Sign Up with Facebook</button>
-          {/* Add more social media sign-up buttons as needed */}
+          <button className="social-btn" onClick={() => handleSocialSignIn('Google')}>Sign Up with Google</button>
+          <button className="social-btn" onClick={() => handleSocialSignIn('Facebook')}>Sign Up with Facebook</button>
         </div>
         <a href="/signin" className="auth-link">Already have an account? Sign In</a>
       </div>

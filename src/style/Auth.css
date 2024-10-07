@@ -1,5 +1,6 @@
 /* Auth.css */
 
+/* Container and Box Styles */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -13,84 +14,103 @@
 .auth-box {
   background-color: #ffffff;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   box-sizing: border-box;
 }
 
+/* Heading */
 h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
 }
 
+/* Input Fields */
 input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
+  padding: 14px;
+  margin-bottom: 18px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   box-sizing: border-box;
 }
 
 input:focus {
   border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
 }
 
+/* Sign Button */
 .sign {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s, transform 0.2s;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
-.sign button:hover {
+.sign:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
 }
 
+/* Social Auth Section */
 .social-auth {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
-.social-auth button {
-  flex: 1; /* Ensure buttons take equal space */
-  margin: 0 5px; /* Space between buttons */
-  background-color: #f5f5f5; /* Background color for social buttons */
-  color: #333; /* Text color */
-  border: 1px solid #ccc; /* Border for buttons */
-  border-radius: 6px; /* Rounded corners */
-  font-size: 14px; /* Font size for buttons */
-  transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
+/* Social Button */
+.social-btn {
+  flex: 1;
+  margin: 0 8px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.4s, box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
-.social-auth button:hover {
-  background-color: #e2e2e2; /* Darker shade on hover */
-  transform: translateY(-2px); /* Slight movement on hover */
+.social-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 86, 179, 0.2);
 }
 
-
+/* Auth Link */
 .auth-link {
   display: block;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 20px;
   color: #007bff;
   text-decoration: none;
   font-size: 14px;
+  transition: color 0.3s;
 }
 
 .auth-link:hover {
   text-decoration: underline;
+  color: #0056b3;
 }
