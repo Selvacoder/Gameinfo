@@ -70,7 +70,7 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
       {error && <h2 className="error-message" aria-live="assertive">Error loading games: {error}</h2>}
       {currentGames.length > 0 ? (
         currentGames.map(game => (
-          <GameCard key={game.id} {...game} />
+          <GameCard key={game._id} {...game} />
         ))
       ) : (
         !loading && (

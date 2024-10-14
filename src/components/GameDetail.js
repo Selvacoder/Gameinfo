@@ -2,41 +2,58 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const GameDetail = () => {
-  const { id } = useParams(); // Get the ID from the URL
+  const { id } = useParams(); // Get the MongoDB _id from the URL
+  console.log("Game ID from URL:", id);
   const [game, setGame] = useState(null); // State to store the game data
   const [loading, setLoading] = useState(true); // State for loading indicator
   const [error, setError] = useState(null); // State for handling errors
 
   useEffect(() => {
-    // Fetch game data from the Node.js API
+    console.log("Fetching data for game ID:", id); // Debug: Check if ID is correctly passed
+
+    // If no ID is found, immediately set an error and stop loading
+    if (!id) {
+      setError('Game ID is missing');
+      setLoading(false);
+      return;
+    }
+
     const fetchGameDetails = async () => {
       try {
-        const response = await fetch(`/api/games/${id}`); // Use relative path with proxy
+        console.log(`Fetching from: http://localhost:5000/api/games/${id}`);
+
+        // Fetch data from the backend running on port 5000 using the MongoDB _id
+        const response = await fetch(`http://localhost:5000/api/games/${id}`);
+
         if (!response.ok) {
-          throw new Error('Game not found');
+          throw new Error(`Failed to fetch game details. Status: ${response.status}`);
         }
+
         const data = await response.json();
-        setGame(data);
+        console.log("Fetched game details:", data); // Debug: Check the data fetched from the backend
+
+        setGame(data); // Store game details in the state
       } catch (err) {
-        setError(err.message);
+        console.error('Error fetching game details:', err);
+        setError(err.message); // Set error state with the message
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading to false once the request completes
       }
     };
 
-    fetchGameDetails();
-  }, [id]);
+    fetchGameDetails(); // Call the function to fetch game details
+  }, [id]); // Re-run the effect when 'id' changes
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading message while fetching data
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>; // Show error message if something goes wrong
+    return <div>Error: {error}</div>;
   }
 
   if (!game) {
-    return <div>Game not found</div>; // Handle case where no game is found
+    return <div>Game not found</div>;
   }
 
   return (

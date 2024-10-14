@@ -39,8 +39,8 @@ const GameList = () => {
       {games.length > 0 ? (
         games.map(game => (
           <GameCard
-            key={game.id}
-            id={game.id}
+            key={game._id}
+            id={game._id}
             name={game.name}
             description={game.description}
             image={game.image}
