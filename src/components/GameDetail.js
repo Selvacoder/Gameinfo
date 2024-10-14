@@ -1,48 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import '../style/GameDetail.css'; // Import the CSS file
 
 const GameDetail = () => {
-  const { id } = useParams(); // Get the MongoDB _id from the URL
-  console.log("Game ID from URL:", id);
-  const [game, setGame] = useState(null); // State to store the game data
-  const [loading, setLoading] = useState(true); // State for loading indicator
-  const [error, setError] = useState(null); // State for handling errors
+  const { id } = useParams();
+  const [game, setGame] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("Fetching data for game ID:", id); // Debug: Check if ID is correctly passed
-
-    // If no ID is found, immediately set an error and stop loading
-    if (!id) {
-      setError('Game ID is missing');
-      setLoading(false);
-      return;
-    }
-
     const fetchGameDetails = async () => {
       try {
-        console.log(`Fetching from: http://localhost:5000/api/games/${id}`);
-
-        // Fetch data from the backend running on port 5000 using the MongoDB _id
         const response = await fetch(`http://localhost:5000/api/games/${id}`);
-
         if (!response.ok) {
           throw new Error(`Failed to fetch game details. Status: ${response.status}`);
         }
-
         const data = await response.json();
-        console.log("Fetched game details:", data); // Debug: Check the data fetched from the backend
-
-        setGame(data); // Store game details in the state
+        setGame(data);
       } catch (err) {
-        console.error('Error fetching game details:', err);
-        setError(err.message); // Set error state with the message
+        setError(err.message);
       } finally {
-        setLoading(false); // Set loading to false once the request completes
+        setLoading(false);
       }
     };
 
-    fetchGameDetails(); // Call the function to fetch game details
-  }, [id]); // Re-run the effect when 'id' changes
+    fetchGameDetails();
+  }, [id]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -56,22 +39,45 @@ const GameDetail = () => {
     return <div>Game not found</div>;
   }
 
-  // Provide a placeholder image if game.image is not available
-  const placeholderImage = 'https://via.placeholder.com/300'; // Example placeholder
+  const placeholderImage = 'https://via.placeholder.com/300';
   const gameImage = game.image ? `http://localhost:5000/images/${game.image}` : placeholderImage;
-
-  
 
   return (
     <div className="game-detail">
-      <h1>{game.name}</h1>
-      <img src={gameImage} alt={game.name} />
-      <p>{game.description}</p>
-      <p><strong>Genre:</strong> {game.genre || 'N/A'}</p>
-      <p><strong>Release Date:</strong> {game.releaseDate || 'N/A'}</p>
-      <p><strong>Rating:</strong> {game.rating || 'N/A'}</p>
-      <p><strong>Developer:</strong> {game.developer || 'N/A'}</p>
-      <p><strong>Publisher:</strong> {game.publisher || 'N/A'}</p>
+      <div className="game-detail-basic">
+        <img src={gameImage} alt={game.name} />
+        <div className="game-detail-content">
+          <h1>{game.name}</h1>
+          <p>{game.description}</p>
+          <p><strong>Genre:</strong> {game.genre || 'N/A'}</p>
+          <p><strong>Release Date:</strong> {game.releaseDate || 'N/A'}</p>
+          <p><strong>Rating:</strong> {game.rating || 'N/A'}</p>
+          <p><strong>Developer:</strong> {game.developer || 'N/A'}</p>
+          <p><strong>Publisher:</strong> {game.publisher || 'N/A'}</p>
+        </div>
+      </div>
+
+      {/* Additional Data Sections - full-width */}
+      <div className="game-detail-extra">
+        <h2>Story</h2>
+        <p>{game.story || 'No story available.'}</p>
+      </div>
+      <div className="game-detail-extra">
+        <h2>Gameplay</h2>
+        <p>{game.gameplay || 'No gameplay information available.'}</p>
+      </div>
+      <div className="game-detail-extra">
+        <h2>Main Character</h2>
+        <p>{game.main_character || 'No main character information available.'}</p>
+      </div>
+      <div className="game-detail-extra">
+        <h2>World</h2>
+        <p>{game.world || 'No world information available.'}</p>
+      </div>
+      <div className="game-detail-extra">
+        <h2>Unique Feature</h2>
+        <p>{game.unique_feature || 'No unique feature available.'}</p>
+      </div>
     </div>
   );
 };

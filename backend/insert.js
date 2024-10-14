@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost:27017/GameInfo', {
   console.log('Connected to MongoDB');
 
   // Load game data from JSON file
-  const data = JSON.parse(fs.readFileSync('./data/games.json', 'utf8'));
+  const data = JSON.parse(fs.readFileSync('./data/extraGameData.json', 'utf8'));
 
   // Insert the data into the Game collection
   await Game.insertMany(data);

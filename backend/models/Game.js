@@ -8,7 +8,12 @@ const gameSchema = new mongoose.Schema({
     genre: String,
     rating: String,
     publisher: String,
-    developer: String
+    developer: String,
+    story: String,
+    gameplay: String,
+    main_character: String,
+    world: String,
+    unique_feature: String,
 });
 
 const Game = mongoose.model('Game', gameSchema);
