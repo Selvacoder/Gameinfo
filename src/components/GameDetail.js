@@ -56,10 +56,16 @@ const GameDetail = () => {
     return <div>Game not found</div>;
   }
 
+  // Provide a placeholder image if game.image is not available
+  const placeholderImage = 'https://via.placeholder.com/300'; // Example placeholder
+  const gameImage = game.image ? `http://localhost:5000/images/${game.image}` : placeholderImage;
+
+  
+
   return (
     <div className="game-detail">
       <h1>{game.name}</h1>
-      {game.image ? <img src={game.image} alt={game.name} /> : <p>No image available</p>}
+      <img src={gameImage} alt={game.name} />
       <p>{game.description}</p>
       <p><strong>Genre:</strong> {game.genre || 'N/A'}</p>
       <p><strong>Release Date:</strong> {game.releaseDate || 'N/A'}</p>

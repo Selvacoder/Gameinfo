@@ -12,10 +12,11 @@ const GameCard = ({ name, description, image, _id }) => {
   };
 
   const placeholderImage = 'https://via.placeholder.com/150'; // Example placeholder
+  const gameImage = image ? `http://localhost:5000/images/${image}` : placeholderImage;
 
   return (
     <div className="game-card">
-      <img src={image || placeholderImage} alt={name} className="game-image" />
+      <img src={gameImage} alt={name} className="game-image" />
       <h3>{name}</h3>
       <p>{description}</p>
       <button className="btn-view" onClick={handleViewClick}>
