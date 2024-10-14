@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const mongoose = require('mongoose');
 const crypto = require('crypto'); // For OTP generation
 const sgMail = require('@sendgrid/mail'); // For SendGrid
@@ -25,6 +26,8 @@ sgMail.setApiKey('AJV8CTWL8HT28E1U6YQ5PXGY'); // Replace with your actual SendGr
 const generateOTP = () => {
   return crypto.randomBytes(3).toString('hex').toUpperCase(); // Generate 6-character OTP
 };
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Route for sign-up
 app.post('/api/auth/signup', async (req, res) => {
@@ -97,6 +100,7 @@ app.post('/api/auth/verify-otp', async (req, res) => {
     res.status(500).json({ message: 'Server error', error });
   }
 });
+
 
 // Route to get a game by ID
 app.get('/api/games/:id', async (req, res) => {
