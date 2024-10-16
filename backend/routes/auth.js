@@ -1,6 +1,5 @@
-// routes/authRoutes.js
 const express = require('express');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs'); // Add bcrypt for password hashing
 const User = require('../models/User'); // User model for sign-up and sign-in
 
 const router = express.Router();
@@ -16,15 +15,15 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Hash the password
+    // Hash the password before storing it
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Save the new user
+    // Save the new user with hashed password
     const user = new User({
       name,
       email,
-      password: hashedPassword,
+      password: hashedPassword, // Storing hashed password
       phone,
     });
     await user.save();
@@ -41,18 +40,22 @@ router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email: email.toLowerCase() });
+    // Find the user by email
+    const user = await User.findOne({ email: req.body.email.toLowerCase() });
+
+    // Check if the user exists
     if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+      return res.status(400).json({ message: 'Invalid email' });
     }
 
-    // Compare the hashed password with the submitted password
+    // Compare the entered password with the stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+      return res.status(400).json({ message: 'Invalid password' });
     }
 
-    // If the email and password are correct
+    // If email and password match, respond with success
     res.status(200).json({
       message: 'Sign-in successful',
       user: {
