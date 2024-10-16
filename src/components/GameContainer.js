@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GameCard from './GameCard';
 import '../style/GameContainer.css';
+import { useDebounce } from 'use-debounce'; // Debounce hook for efficient search
 
 const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange }) => {
   const [games, setGames] = useState([]);
@@ -8,6 +9,7 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const gamesPerPage = 15;
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500); // Debounce the search term
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -30,7 +32,7 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
 
   // Filter games based on the search term and filters
   const filteredGames = games.filter(game => {
-    const matchesSearchTerm = game.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearchTerm = game.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
     const matchesGenre = genre ? game.genre === genre : true;
     const matchesDeveloper = developer ? game.developer === developer : true;
     const matchesPublisher = publisher ? game.publisher === publisher : true;
@@ -47,7 +49,7 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
   // Reset currentPage when searchTerm or filters change
   useEffect(() => {
     setCurrentPage(0);
-  }, [searchTerm, genre, developer, publisher, ratingRange]);
+  }, [debouncedSearchTerm, genre, developer, publisher, ratingRange]);
 
   const handleNext = () => {
     if (currentPage < totalPages - 1) {
@@ -64,10 +66,36 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
   // Determine which games to display on the current page
   const currentGames = filteredGames.slice(currentPage * gamesPerPage, (currentPage + 1) * gamesPerPage);
 
+  const handleRetry = () => {
+    setLoading(true);
+    setError(null);
+    // Fetch the games again if there's an error
+    const fetchGames = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/games');
+        if (!response.ok) {
+          throw new Error('Failed to fetch games');
+        }
+        const data = await response.json();
+        setGames(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGames();
+  };
+
   return (
     <div className="game-card-container" aria-live="polite">
-      {loading && <h2 aria-live="assertive">Loading games...</h2>}
-      {error && <h2 className="error-message" aria-live="assertive">Error loading games: {error}</h2>}
+      {loading && <div className="loading-spinner" aria-live="assertive">Loading...</div>}
+      {error && (
+        <div className="error-message" aria-live="assertive">
+          <p>Error loading games: {error}</p>
+          <button onClick={handleRetry} aria-label="Retry fetching games">Retry</button>
+        </div>
+      )}
       {currentGames.length > 0 ? (
         currentGames.map(game => (
           <GameCard key={game._id} {...game} />
@@ -80,14 +108,29 @@ const GameContainer = ({ searchTerm, genre, developer, publisher, ratingRange })
           </div>
         )
       )}
-      <div className="pagination-controls">
-        <button onClick={handlePrevious} disabled={currentPage === 0}>
-          Previous
-        </button>
-        <button onClick={handleNext} disabled={currentPage === totalPages - 1 }>
-          Next
-        </button>
-      </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="pagination-controls" aria-live="polite">
+          <button 
+            onClick={handlePrevious} 
+            disabled={currentPage === 0} 
+            aria-label="Previous Page"
+          >
+            Previous
+          </button>
+          <span className="page-info" aria-live="polite">
+            Page {currentPage + 1} of {totalPages}
+          </span>
+          <button 
+            onClick={handleNext} 
+            disabled={currentPage === totalPages - 1}
+            aria-label="Next Page"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

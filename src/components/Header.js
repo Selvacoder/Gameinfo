@@ -83,8 +83,10 @@ const Header = ({
 
       <div className="auth-buttons">
         {isSignedIn ? (
+          // If signed in, show the Sign Out button
           <button className="btn-signout" onClick={handleSignOut}>Sign Out</button>
         ) : (
+          // If not signed in, show the Sign In and Sign Up buttons
           <>
             <button className="btn-signin" onClick={handleSignInClick}>Sign In</button>
             <button className="btn-signup" onClick={handleSignUpClick}>Sign Up</button>

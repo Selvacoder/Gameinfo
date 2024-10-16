@@ -1,20 +1,43 @@
-// Layout.js
 import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import '../style/Layout.css';
 
-const Layout = ({ isSignedIn, handleSignIn, handleSignOut, searchTerm, setSearchTerm, genres, tempGenre, setTempGenre, developers, tempDeveloper, setTempDeveloper, publishers, tempPublisher, setTempPublisher, tempRatingRange, setTempRatingRange, applyFilters }) => {
+const Layout = ({
+  isSignedIn,
+  handleSignIn,
+  handleSignOut,
+  searchTerm,
+  setSearchTerm,
+  genres,
+  tempGenre,
+  setTempGenre,
+  developers,
+  tempDeveloper,
+  setTempDeveloper,
+  publishers,
+  tempPublisher,
+  setTempPublisher,
+  tempRatingRange,
+  setTempRatingRange,
+  applyFilters
+}) => {
   const location = useLocation();
 
   // Define the paths where the header should be hidden
-  const hideHeaderPaths = ['/signin', '/signup'];
+  const hideHeaderPaths = ['/signin', '/signup', '/games/'];
 
-  // Check if the current path is in the hideHeaderPaths or if it matches the GameDetail pattern
-  const shouldHideHeader = hideHeaderPaths.some(path => location.pathname.includes(path)) || location.pathname.startsWith('/games/');
+  // Check if the current path should hide the header
+  const shouldHideHeader = hideHeaderPaths.some((path) => {
+    if (path === '/games/') {
+      return location.pathname.startsWith('/games/');
+    }
+    return location.pathname === path;
+  });
 
   return (
     <div className="layout">
+      {/* Render the header only if the header should not be hidden */}
       {!shouldHideHeader && (
         <Header
           isSignedIn={isSignedIn}

@@ -1,17 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const twilio = require('twilio');
 const bcrypt = require('bcryptjs');
-
-// Twilio setup
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = new twilio(accountSid, authToken);
-
-// Generate a random OTP
-const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 // User sign-up
 router.post('/signup', async (req, res) => {
@@ -21,46 +11,22 @@ router.post('/signup', async (req, res) => {
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ msg: 'User already exists' });
 
-    // Create a new user
-    user = new User({ name, email, password, phone });
+    // Hash the password before saving the user
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Save the user
-    await user.save();
-
-    // Generate OTP
-    const otp = generateOTP();
-    user.otp = otp;
-
-    // Send OTP to user's phone
-    await client.messages.create({
-      body: `Your OTP is ${otp}`,
-      from: process.env.TWILIO_PHONE_NUMBER,
-      to: phone,
+    // Create a new user with hashed password
+    user = new User({ 
+      name, 
+      email, 
+      password: hashedPassword, 
+      phone,
     });
 
+    // Save the user to the database
     await user.save();
-    res.json({ msg: 'User registered. OTP sent to phone number.' });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
-  }
-});
 
-// Verify OTP
-router.post('/verify-otp', async (req, res) => {
-  const { email, otp } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: 'User not found' });
-
-    if (user.otp === otp) {
-      user.isVerified = true;
-      user.otp = null;
-      await user.save();
-      res.json({ msg: 'OTP verified. User is signed up successfully!' });
-    } else {
-      res.status(400).json({ msg: 'Invalid OTP' });
-    }
+    res.json({ msg: 'User registered successfully' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
