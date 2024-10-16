@@ -10,14 +10,42 @@ const SignIn = ({ handleSignIn }) => {
   const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
+  // Basic email validation
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  // Validate form fields
+  const isFormValid = () => {
+    if (!validateEmail(email)) {
+      setError('Invalid email format');
+      return false;
+    }
+    if (password.trim() === '') {
+      setError('Password is required');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading while waiting for response
-    setError(''); // Clear previous errors
+    setLoading(true);
+    setError(''); // Clear any previous error
+
+    if (!isFormValid()) {
+      setLoading(false);
+      return;
+    }
 
     try {
       // Send request to the backend
-      const res = await axios.post('/api/auth/signin', { email, password });
+      const res = await axios.post('http://localhost:5000/api/auth/signin', { email, password }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
 
       if (res.data.message) {
         // Handle success
@@ -25,14 +53,23 @@ const SignIn = ({ handleSignIn }) => {
         localStorage.setItem('isAuthenticated', 'true'); // Set authentication flag
 
         handleSignIn(); // Update sign-in state in the parent component
+        setEmail(''); // Clear email
+        setPassword(''); // Clear password
         navigate('/'); // Redirect to home page after successful sign-in
       }
     } catch (err) {
-      // Handle errors
-      if (err.response && err.response.data.message) {
-        setError(err.response.data.message); // Display error from backend
+      // Enhanced error logging and feedback
+      console.error('SignIn error:', err);
+
+      if (err.response) {
+        // Check if error response is from the backend
+        if (err.response.data.message) {
+          setError(err.response.data.message); // Display error from backend
+        } else {
+          setError('Error signing in. Please try again.'); // Generic error message
+        }
       } else {
-        setError('Error signing in'); // Generic error message
+        setError('Network error. Please check your connection.');
       }
     } finally {
       setLoading(false); // Reset loading state
@@ -58,8 +95,8 @@ const SignIn = ({ handleSignIn }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          
-          {error && <p className="error">{error}</p>}
+
+          {error && <p className="error">{error}</p>} {/* Display errors if any */}
           
           <button className="sign" type="submit" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'} {/* Show loading message */}

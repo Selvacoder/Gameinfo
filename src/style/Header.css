@@ -25,7 +25,6 @@
 }
 
 .search-bar {
-<<<<<<< HEAD
   flex-grow: 1; /* Allow search bar to grow and take available space */
   max-width: 400px; /* Set a maximum width for the search bar */
   padding: 8px;
@@ -38,13 +37,11 @@
 .search-bar:focus {
   border-color: #007bff;
   outline: none;
-=======
   width: 499px; /* Set a smaller width for minimal size */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
   margin-right: 20px;
->>>>>>> develop
 }
 
 .auth-buttons {
