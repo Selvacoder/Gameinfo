@@ -7,6 +7,8 @@ const GameDetail = () => {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [rating, setRating] = useState(0); // State to manage the rating
+  const [randomRating, setRandomRating] = useState(null); // State for random rating
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -26,6 +28,25 @@ const GameDetail = () => {
 
     fetchGameDetails();
   }, [id]);
+
+  const handleRating = (star) => {
+    setRating(star);
+  };
+
+  const handleSubmitRating = () => {
+    // Generate a random rating between 3, 3.5, 4, 4.5, or 5
+    const randomRatings = [3, 3.5, 4, 4.5, 5];
+    const randomIndex = Math.floor(Math.random() * randomRatings.length);
+    const newRandomRating = randomRatings[randomIndex];
+    
+    // Update the random rating state
+    setRandomRating(newRandomRating);
+
+    // Optionally, send the random rating to the backend (if needed)
+    console.log("Random rating generated:", newRandomRating);
+
+    // You can update the backend rating submission logic here if necessary
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -51,9 +72,32 @@ const GameDetail = () => {
           <p>{game.description}</p>
           <p><strong>Genre:</strong> {game.genre || 'N/A'}</p>
           <p><strong>Release Date:</strong> {game.releaseDate || 'N/A'}</p>
-          <p><strong>Rating:</strong> {game.rating || 'N/A'}</p>
           <p><strong>Developer:</strong> {game.developer || 'N/A'}</p>
           <p><strong>Publisher:</strong> {game.publisher || 'N/A'}</p>
+
+          {/* 5-Star Rating Input */}
+          <div className="game-rating">
+            <h2>Rating:</h2>
+            <div className="stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star ${star <= rating ? 'filled' : ''}`}
+                  onClick={() => handleRating(star)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            <button className="submit-rating" onClick={handleSubmitRating}>Submit</button>
+          </div>
+
+          {/* Display Random Rating */}
+          {randomRating && (
+            <div className="overall-rating">
+              <h2>Overall rating: {randomRating}</h2>
+            </div>
+          )}
         </div>
       </div>
 

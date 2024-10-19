@@ -96,3 +96,98 @@
   clear: both;
   margin-top: 40px;
 }
+
+/* Styling for the game rating section */
+.game-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: flex-start;
+  font-family: 'Arial', sans-serif; /* Ensure consistent font */
+}
+
+/* Styling the stars */
+.stars {
+  display: flex;
+  cursor: pointer;
+  margin-right: 20px; /* Space between stars and submit button */
+}
+
+.star {
+  font-size: 35px; /* Larger size for better visibility */
+  color: #ccc; /* Unfilled star color */
+  transition: color 0.2s ease-in-out;
+  margin: 0 5px; /* Space between stars */
+}
+
+.star.filled {
+  color: gold; /* Filled star color */
+}
+
+.star:hover {
+  color: gold; /* Hover effect for interactive stars */
+}
+
+/* Styling for submit button */
+.submit-rating {
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.submit-rating:hover {
+  background-color: #e64a19;
+  transform: scale(1.05); /* Slight scale-up on hover */
+}
+
+/* Styling for overall rating display */
+.overall-rating {
+  margin-top: 20px;
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.overall-rating h2 {
+  margin-right: 10px;
+}
+
+.overall-rating .rating-value {
+  font-size: 2rem;
+  color: gold;
+}
+
+/* Styling for overall rating stars */
+.overall-rating-stars {
+  display: flex;
+  margin-left: 10px;
+}
+
+.overall-rating-stars .star {
+  font-size: 25px;
+  color: gold;
+  margin-right: 3px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .stars {
+    justify-content: center; /* Center stars on mobile */
+  }
+
+  .overall-rating {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overall-rating-stars {
+    margin-top: 5px;
+  }
+}
