@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout'; // Import the Layout component
 import GameContainer from './components/GameContainer';
@@ -13,6 +13,7 @@ function App() {
   const [developer, setDeveloper] = useState('');
   const [publisher, setPublisher] = useState('');
   const [ratingRange, setRatingRange] = useState({ min: '', max: '' });
+  const [gameTitles, setGameTitles] = useState([]);
 
   // Temporary states for filters
   const [tempGenre, setTempGenre] = useState('');
@@ -23,6 +24,12 @@ function App() {
   const genres = ['Action', 'Adventure', 'RPG', 'Strategy'];
   const developers = ['Nintendo', 'Epic Games', 'Mojang', 'Sony', 'Rockstar Games', 'Innersloth'];
   const publishers = ['Nintendo', 'Epic Games', 'Mojang', 'Sony', 'Rockstar Games', 'Innersloth'];
+
+  useEffect(() => {
+    fetch('/api/games')
+      .then((response) => response.json())
+      .then((data) => setGameTitles(data.map((game) => game.name)));
+  }, []);
 
   // Sign-in and sign-out handlers
   const handleSignIn = () => setIsSignedIn(true);
@@ -70,6 +77,7 @@ function App() {
               tempRatingRange={tempRatingRange}
               setTempRatingRange={setTempRatingRange}
               applyFilters={applyFilters}
+              gameTitles={gameTitles}
             />
           }
         >

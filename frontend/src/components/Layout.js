@@ -21,7 +21,8 @@ const Layout = ({
   setTempPublisher,
   tempRatingRange,
   setTempRatingRange,
-  applyFilters
+  applyFilters,
+  gameTitles
 }) => {
   const location = useLocation();
 
@@ -56,6 +57,7 @@ const Layout = ({
           tempRatingRange={tempRatingRange}
           setTempRatingRange={setTempRatingRange}
           applyFilters={applyFilters}
+          gameTitles={gameTitles}
         />
       )}
       <Outlet /> {/* This will render the matching child route */}

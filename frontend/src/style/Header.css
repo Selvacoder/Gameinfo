@@ -62,17 +62,13 @@ body.dark-mode .btn-menu:hover {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin: 0 20px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, width 0.3s, padding 0.3s;
 }
 
 .search-bar:focus {
   border-color: #007bff;
   outline: none;
-  width: 499px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-right: 20px;
+  padding: 8px; /* Maintain consistent padding */
 }
 
 body.dark-mode .search-bar {
@@ -276,4 +272,67 @@ body.dark-mode .filter h3 {
 
 body.dark-mode .toggle-btn {
   background-color: #495057;
+}
+/* General styles for autocomplete suggestions */
+.autocomplete-suggestions {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  position: absolute;
+  background-color: white;
+  width: 250px; /* Set width to 250px to match the search bar */
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+  font-size: 14px;     /* Adjust font size */
+  border-radius: 5px;
+  border-color: #007bff;
+  transition: max-height 0.3s ease; /* Optional: smooth transition for max-height */
+  max-height: none; /* Ensure no scrolling */
+  overflow-y: hidden; /* Remove scrolling */
+  top: 100%;  /* Position it directly below the search bar */
+  left: 70px;    /* Align it with the left side of the search bar */
+}
+
+/* Dark mode specific styles for autocomplete suggestions */
+body.dark-mode .autocomplete-suggestions {
+  background-color: #333;
+  border: 1px solid #555;
+}
+
+/* Individual autocomplete suggestion styles */
+.autocomplete-suggestion {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Active suggestion styles */
+.autocomplete-suggestion.active {
+  background-color: #f0f0f0;
+}
+
+body.dark-mode .autocomplete-suggestion.active {
+  background-color: #495057; /* Darker background for active suggestion */
+}
+
+/* Highlighted text */
+.highlight {
+  font-weight: bold;
+  color: #4a90e2; /* Light mode blue color */
+}
+
+/* Dark mode specific highlight color */
+body.dark-mode .highlight {
+  color: #007bff; /* Blue color for dark mode highlight */
+}
+
+/* Hover effects for suggestions */
+.autocomplete-suggestion:hover {
+  background-color: #f0f0f0;
+}
+
+body.dark-mode .autocomplete-suggestion:hover {
+  background-color: #444;
+  color: #fff; /* Change text color for visibility */
 }
