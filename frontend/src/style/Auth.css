@@ -6,13 +6,19 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-color: #f4f4f4; /* Light background for auth container */
   padding: 20px;
   box-sizing: border-box;
 }
 
+/* Dark Mode Container */
+body.dark-mode .auth-container {
+  background-color: #222; /* Dark background for container */
+}
+
+/* Auth Box */
 .auth-box {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Light background for box */
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -21,13 +27,24 @@
   box-sizing: border-box;
 }
 
+/* Dark Mode Auth Box */
+body.dark-mode .auth-box {
+  background-color: #333; /* Dark background for auth box */
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2); /* Lighter shadow in dark mode */
+}
+
 /* Heading */
 h2 {
   text-align: center;
-  color: #333;
+  color: #333; /* Heading color for light mode */
   margin-bottom: 24px;
   font-size: 24px;
   font-weight: 600;
+}
+
+/* Dark Mode Heading */
+body.dark-mode h2 {
+  color: #ccc; /* Lighter heading color for dark mode */
 }
 
 /* Input Fields */
@@ -42,10 +59,24 @@ input {
   box-sizing: border-box;
 }
 
+/* Dark Mode Input Fields */
+body.dark-mode input {
+  background-color: #555; /* Darker input background */
+  color: #ddd; /* Lighter text color for inputs */
+  border: 1px solid #666; /* Darker border */
+}
+
+/* Input Focus */
 input:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
+}
+
+/* Dark Mode Input Focus */
+body.dark-mode input:focus {
+  border-color: #66b3ff; /* Lighter blue border on focus */
+  box-shadow: 0 0 5px rgba(102, 179, 255, 0.5);
 }
 
 /* Sign Button */
@@ -62,10 +93,22 @@ input:focus {
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
+/* Dark Mode Sign Button */
+body.dark-mode .sign {
+  background-color: #0056b3; /* Darker blue button in dark mode */
+}
+
+/* Sign Button Hover */
 .sign:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+}
+
+/* Dark Mode Sign Button Hover */
+body.dark-mode .sign:hover {
+  background-color: #3383cc; /* Lighter hover effect in dark mode */
+  box-shadow: 0 4px 12px rgba(51, 131, 204, 0.3);
 }
 
 /* Social Auth Section */
@@ -93,10 +136,21 @@ input:focus {
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
 
+/* Dark Mode Social Button */
+body.dark-mode .social-btn {
+  background-color: #0056b3; /* Darker background for buttons in dark mode */
+}
+
+/* Social Button Hover */
 .social-btn:hover {
   background-color: #0056b3;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0, 86, 179, 0.2);
+}
+
+/* Dark Mode Social Button Hover */
+body.dark-mode .social-btn:hover {
+  background-color: #3383cc; /* Lighter hover effect in dark mode */
 }
 
 /* Auth Link */
@@ -110,7 +164,18 @@ input:focus {
   transition: color 0.3s;
 }
 
+/* Dark Mode Auth Link */
+body.dark-mode .auth-link {
+  color: #66b3ff; /* Lighter link color for dark mode */
+}
+
+/* Auth Link Hover */
 .auth-link:hover {
   text-decoration: underline;
   color: #0056b3;
+}
+
+/* Dark Mode Auth Link Hover */
+body.dark-mode .auth-link:hover {
+  color: #3383cc; /* Lighter hover effect in dark mode */
 }

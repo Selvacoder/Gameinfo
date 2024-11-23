@@ -6,9 +6,15 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Styling for the game image */
+/* Dark mode for the game detail */
+[data-theme="dark"] .game-detail {
+  background-color: #333;
+  color: #f9f9f9;
+}
+
 .game-detail img {
   float: left;
   max-width: 300px;
@@ -18,14 +24,13 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.game-detail img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+/* Dark mode for image */
+[data-theme="dark"] .game-detail img {
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
-/* Styling for the game details content */
 .game-detail-content {
-  overflow: hidden; /* Ensures proper float handling */
+  overflow: hidden;
 }
 
 /* Heading styling */
@@ -33,18 +38,34 @@
   font-size: 2.5rem;
   color: #333;
   margin-bottom: 15px;
+  font-weight: 600;
 }
 
-/* Paragraphs */
+/* Dark mode heading */
+[data-theme="dark"] .game-detail-content h1 {
+  color: #f9f9f9;
+}
+
 .game-detail-content p {
   font-size: 1.2rem;
   color: #555;
   margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* Dark mode paragraphs */
+[data-theme="dark"] .game-detail-content p {
+  color: #ccc;
 }
 
 .game-detail-content strong {
   color: #333;
   font-weight: 600;
+}
+
+/* Dark mode strong text */
+[data-theme="dark"] .game-detail-content strong {
+  color: #f9f9f9;
 }
 
 /* Additional sections styling */
@@ -60,6 +81,12 @@
   padding-bottom: 5px;
 }
 
+/* Dark mode additional section */
+[data-theme="dark"] .game-detail-extra h2 {
+  color: #8ab4f8;
+  border-bottom: 3px solid #8ab4f8;
+}
+
 .game-detail-extra p {
   font-size: 1.2rem;
   color: #666;
@@ -67,17 +94,50 @@
   line-height: 1.6;
 }
 
+/* Dark mode extra section text */
+[data-theme="dark"] .game-detail-extra p {
+  color: #bbb;
+}
+
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .game-detail {
     padding: 15px;
   }
 
   .game-detail img {
-    float: none;
-    margin: 0 auto 20px auto;
-    display: block;
     max-width: 100%;
+    margin: 0 auto 20px;
+    display: block;
+  }
+
+  .game-detail-content h1 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .game-detail-content p {
+    font-size: 1.1rem;
+  }
+
+  .game-detail-extra h2 {
+    font-size: 1.6rem;
+  }
+
+  .game-detail-extra p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-detail {
+    padding: 10px;
+  }
+
+  .game-detail img {
+    max-width: 100%;
+    margin: 0 auto 20px;
+    display: block;
   }
 
   .game-detail-content h1 {
@@ -89,9 +149,16 @@
   .game-detail-extra p {
     font-size: 1.1rem;
   }
+
+  .game-detail-extra h2 {
+    font-size: 1.4rem;
+  }
+
+  .game-detail-extra p {
+    font-size: 1rem;
+  }
 }
 
-/* Floating right for extra data after image */
 .game-detail-extra {
   clear: both;
   margin-top: 40px;
@@ -103,32 +170,40 @@
   align-items: center;
   margin-top: 20px;
   justify-content: flex-start;
-  font-family: 'Arial', sans-serif; /* Ensure consistent font */
+  font-family: 'Arial', sans-serif;
 }
 
-/* Styling the stars */
+/* Dark mode game rating section */
+[data-theme="dark"] .game-rating {
+  color: #f9f9f9;
+}
+
 .stars {
   display: flex;
   cursor: pointer;
-  margin-right: 20px; /* Space between stars and submit button */
+  margin-right: 20px;
 }
 
 .star {
-  font-size: 35px; /* Larger size for better visibility */
-  color: #ccc; /* Unfilled star color */
+  font-size: 35px;
+  color: #ccc;
   transition: color 0.2s ease-in-out;
-  margin: 0 5px; /* Space between stars */
+  margin: 0 5px;
 }
 
 .star.filled {
-  color: gold; /* Filled star color */
+  color: gold;
 }
 
 .star:hover {
-  color: gold; /* Hover effect for interactive stars */
+  color: gold;
 }
 
-/* Styling for submit button */
+/* Dark mode stars */
+[data-theme="dark"] .star {
+  color: #999;
+}
+
 .submit-rating {
   padding: 10px 20px;
   background-color: #ff5722;
@@ -140,9 +215,15 @@
   font-size: 1.1rem;
 }
 
+/* Dark mode submit button */
+[data-theme="dark"] .submit-rating {
+  background-color: #ff5722;
+  color: #fff;
+}
+
 .submit-rating:hover {
   background-color: #e64a19;
-  transform: scale(1.05); /* Slight scale-up on hover */
+  transform: scale(1.05);
 }
 
 /* Styling for overall rating display */
@@ -155,6 +236,10 @@
   align-items: center;
 }
 
+[data-theme="dark"] .overall-rating {
+  color: #f9f9f9;
+}
+
 .overall-rating h2 {
   margin-right: 10px;
 }
@@ -164,7 +249,11 @@
   color: gold;
 }
 
-/* Styling for overall rating stars */
+/* Dark mode overall rating stars */
+[data-theme="dark"] .overall-rating .rating-value {
+  color: gold;
+}
+
 .overall-rating-stars {
   display: flex;
   margin-left: 10px;
@@ -176,10 +265,15 @@
   margin-right: 3px;
 }
 
+/* Dark mode overall rating stars */
+[data-theme="dark"] .overall-rating-stars .star {
+  color: gold;
+}
+
 /* Adjustments for smaller screens */
 @media (max-width: 768px) {
   .stars {
-    justify-content: center; /* Center stars on mobile */
+    justify-content: center;
   }
 
   .overall-rating {

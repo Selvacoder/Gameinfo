@@ -1,3 +1,4 @@
+/* Game Card Styles */
 .game-card {
   border: 1px solid #e0e0e0; /* Slightly lighter gray for better contrast */
   border-radius: 10px; /* Increased border radius for a softer look */
@@ -16,6 +17,18 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
+/* Game Card Dark Mode */
+body.dark-mode .game-card {
+  background-color: #2c2c2c; /* Dark background for the card */
+  border: 1px solid #444; /* Darker border for the card */
+  color: white; /* White text for contrast */
+}
+
+body.dark-mode .game-card:hover {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2); /* Lighter shadow on hover in dark mode */
+}
+
+/* Game Image */
 .game-image {
   width: 100%; /* Use full width of the card */
   height: 200px; /* Set a fixed height for uniform size */
@@ -25,16 +38,28 @@
   margin: 0 auto; /* Auto margin for centering */
 }
 
+/* Heading (Title) */
 h3 {
   margin: 12px 0; /* Increased margin for better spacing */
   font-size: 1.5em; /* Increased font size for better visibility */
+  color: #333; /* Default heading color */
 }
 
+body.dark-mode h3 {
+  color: #ddd; /* Light color for headings in dark mode */
+}
+
+/* Paragraphs */
 p {
   color: #666; /* Slightly darker text for better contrast */
   line-height: 1.5; /* Improved line height for readability */
 }
 
+body.dark-mode p {
+  color: #bbb; /* Lighter text color for paragraphs in dark mode */
+}
+
+/* View Button */
 .btn-view {
   background-color: #007bff; /* Primary button color */
   color: white;
@@ -55,3 +80,11 @@ p {
   background-color: #0056b3; /* Darker shade on hover */
 }
 
+/* Button Dark Mode */
+body.dark-mode .btn-view {
+  background-color: #495057; /* Darker background for the button */
+}
+
+body.dark-mode .btn-view:hover {
+  background-color: #6c757d; /* Darker shade on hover in dark mode */
+}

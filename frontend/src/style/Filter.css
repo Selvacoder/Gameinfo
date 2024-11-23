@@ -1,67 +1,112 @@
+/* Filter Container */
 .filter-container {
-    margin-top: 15px; /* Reduced margin */
-    padding: 15px; /* Reduced padding */
-    background-color: #f9f9f9; /* Light background color */
-    border: 1px solid #ddd; /* Border around the filter container */
-    border-radius: 6px; /* Slightly reduced rounded corners */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .filter-title {
-    font-size: 20px; /* Reduced title font size */
-    margin-bottom: 15px; /* Reduced spacing below title */
-    color: #333; /* Title color */
-  }
-  
-  .filter-group {
-    margin-bottom: 15px; /* Reduced spacing between filter groups */
-  }
-  
-  .filter-group h3 {
-    font-size: 16px; /* Smaller font size for filter group titles */
-    margin-bottom: 5px; /* Reduced margin below group titles */
-    color: #555; /* Lighter color for group titles */
-  }
-  
-  .filter-group select,
-  .filter-rating-input {
-    width: 100%; /* Full width for inputs */
-    padding: 8px; /* Reduced padding */
-    margin-top: 5px; /* Spacing above inputs */
-    border: 1px solid #ccc; /* Border for inputs */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Reduced font size */
-    transition: border-color 0.3s; /* Smooth transition on focus */
-  }
-  
-  .filter-rating-input {
-    width: 48%; /* Slightly less than half to fit side by side */
-  }
-  
-  .filter-group select:focus,
-  .filter-rating-input:focus {
-    border-color: #007bff; /* Blue border on focus */
-    outline: none; /* Remove default outline */
-  }
-  
-  .rating-range {
-    display: flex; /* Flexbox for rating inputs */
-    justify-content: space-between; /* Space between inputs */
-  }
-  
-  .btn-apply {
-    background-color: #007bff; /* Primary button color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners */
-    padding: 10px; /* Button padding */
-    cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s ease-in-out; /* Smooth hover effect */
-    width: 100%; /* Full width button */
-    font-size: 14px; /* Button font size */
-  }
-  
-  .btn-apply:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
+  margin-top: 15px; /* Reduced margin */
+  padding: 15px; /* Reduced padding */
+  background-color: #f9f9f9; /* Light background color */
+  border: 1px solid #ddd; /* Border around the filter container */
+  border-radius: 6px; /* Slightly reduced rounded corners */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Dark Mode Filter Container */
+body.dark-mode .filter-container {
+  background-color: #333; /* Dark background for filter container */
+  border: 1px solid #444; /* Darker border */
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2); /* Lighter shadow for dark mode */
+}
+
+/* Filter Title */
+.filter-title {
+  font-size: 20px; /* Reduced title font size */
+  margin-bottom: 15px; /* Reduced spacing below title */
+  color: #333; /* Title color */
+}
+
+/* Dark Mode Filter Title */
+body.dark-mode .filter-title {
+  color: #ccc; /* Lighter text color for the title */
+}
+
+/* Filter Group */
+.filter-group {
+  margin-bottom: 15px; /* Reduced spacing between filter groups */
+}
+
+/* Filter Group Title */
+.filter-group h3 {
+  font-size: 16px; /* Smaller font size for filter group titles */
+  margin-bottom: 5px; /* Reduced margin below group titles */
+  color: #555; /* Lighter color for group titles */
+}
+
+/* Dark Mode Filter Group Title */
+body.dark-mode .filter-group h3 {
+  color: #bbb; /* Lighter text color for filter group titles */
+}
+
+/* Filter Inputs */
+.filter-group select,
+.filter-rating-input {
+  width: 100%; /* Full width for inputs */
+  padding: 8px; /* Reduced padding */
+  margin-top: 5px; /* Spacing above inputs */
+  border: 1px solid #ccc; /* Border for inputs */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Reduced font size */
+  transition: border-color 0.3s; /* Smooth transition on focus */
+}
+
+/* Dark Mode Filter Inputs */
+body.dark-mode .filter-group select,
+body.dark-mode .filter-rating-input {
+  background-color: #555; /* Dark background for inputs */
+  color: #ddd; /* Lighter text color for inputs */
+  border: 1px solid #666; /* Darker border */
+}
+
+/* Focus on Inputs */
+.filter-group select:focus,
+.filter-rating-input:focus {
+  border-color: #007bff; /* Blue border on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Dark Mode Focus on Inputs */
+body.dark-mode .filter-group select:focus,
+body.dark-mode .filter-rating-input:focus {
+  border-color: #66b3ff; /* Lighter blue border on focus in dark mode */
+}
+
+/* Rating Range Flexbox */
+.rating-range {
+  display: flex; /* Flexbox for rating inputs */
+  justify-content: space-between; /* Space between inputs */
+}
+
+/* Apply Button */
+.btn-apply {
+  background-color: #007bff; /* Primary button color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px; /* Button padding */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s ease-in-out; /* Smooth hover effect */
+  width: 100%; /* Full width button */
+  font-size: 14px; /* Button font size */
+}
+
+/* Dark Mode Apply Button */
+body.dark-mode .btn-apply {
+  background-color: #0056b3; /* Darker button color in dark mode */
+}
+
+/* Apply Button Hover */
+.btn-apply:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Dark Mode Apply Button Hover */
+body.dark-mode .btn-apply:hover {
+  background-color: #3383cc; /* Lighter blue hover effect in dark mode */
+}

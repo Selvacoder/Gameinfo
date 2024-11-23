@@ -87,8 +87,11 @@ function App() {
             }
           />
 
-          {/* Game details page */}
-          <Route path="/games/:id" element={isSignedIn ? <GameDetail /> : <Navigate to="/signin" />} />
+          {/* GameDetail page without sign-in requirement */}
+          <Route 
+            path="/games/:id" 
+            element={<GameDetail />} 
+          />
 
           {/* Sign-In page */}
           <Route path="/signin" element={!isSignedIn ? <SignIn handleSignIn={handleSignIn} /> : <Navigate to="/" />} />

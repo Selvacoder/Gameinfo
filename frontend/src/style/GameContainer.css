@@ -1,3 +1,4 @@
+/* Game Card Container */
 .game-card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
@@ -6,6 +7,7 @@
   padding-bottom: 60px; /* Add padding to avoid overlap with pagination */
 }
 
+/* Pagination Controls */
 .pagination-controls {
   display: flex;
   justify-content: center; /* Center the buttons horizontally */
@@ -13,6 +15,7 @@
   grid-column: span 3; /* Make the controls span across all columns */
 }
 
+/* Pagination Button Styles */
 .pagination-controls button {
   padding: 10px 15px; /* Increase padding for better touch area */
   margin: 0 10px; /* Space between buttons */
@@ -25,21 +28,57 @@
   transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
+/* Dark Mode Pagination Button */
+body.dark-mode .pagination-controls button {
+  background-color: #0056b3; /* Darker background for buttons */
+  color: #ddd; /* Lighter text color */
+}
+
+/* Pagination Button Hover */
 .pagination-controls button:hover {
   background-color: #0056b3; /* Darker shade on hover */
   transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
+/* Dark Mode Pagination Button Hover */
+body.dark-mode .pagination-controls button:hover {
+  background-color: #3383cc; /* Lighter hover effect in dark mode */
+}
+
+/* Disabled Pagination Button */
 .pagination-controls button:disabled {
   background-color: #ccc; /* Gray out disabled buttons */
   cursor: not-allowed; /* Not-allowed cursor */
 }
 
-/* Style for the "Game not found" message */
+/* Dark Mode Disabled Pagination Button */
+body.dark-mode .pagination-controls button:disabled {
+  background-color: #666; /* Darker gray for disabled buttons in dark mode */
+}
+
+/* "Game not found" Message */
 .no-games {
   grid-column: span 3; /* Make the message span across all columns */
   text-align: center;
   color: #ff4500; /* Customize color */
   padding: 20px;
   font-size: 18px;
+}
+
+/* Dark Mode "Game not found" Message */
+body.dark-mode .no-games {
+  color: #ff6347; /* Lighter red/orange color for dark mode */
+  background-color: #444; /* Darker background to match dark mode */
+  border-radius: 8px; /* Optional rounded corners for better look */
+}
+
+/* Dark Mode Game Card Container */
+body.dark-mode .game-card-container {
+  background-color: #222; /* Dark background for the game card container */
+}
+
+/* Dark Mode Pagination Controls */
+body.dark-mode .pagination-controls {
+  background-color: #222; /* Dark background for pagination controls */
+  border-radius: 8px; /* Rounded corners */
 }

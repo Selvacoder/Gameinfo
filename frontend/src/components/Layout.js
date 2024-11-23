@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import '../style/Layout.css';
+import Footer from './Footer';
 
 const Layout = ({
   isSignedIn,
@@ -24,10 +25,8 @@ const Layout = ({
 }) => {
   const location = useLocation();
 
-  // Define the paths where the header should be hidden
   const hideHeaderPaths = ['/signin', '/signup', '/games/'];
 
-  // Check if the current path should hide the header
   const shouldHideHeader = hideHeaderPaths.some((path) => {
     if (path === '/games/') {
       return location.pathname.startsWith('/games/');
@@ -60,6 +59,8 @@ const Layout = ({
         />
       )}
       <Outlet /> {/* This will render the matching child route */}
+
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 };
