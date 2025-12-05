@@ -23,19 +23,19 @@ A modern, full-stack web application for discovering and exploring video games. 
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](src/preview/home.png)
+![Home Page](frontend/src/preview/home.png)
 
 ### 🎮 Game Details
-![Game Details](src/preview/sample.png)
+![Game Details](frontend/src/preview/sample.png)
 
 ### 🔍 Filter by Genre
-![Filter](src/preview/filter.png)
+![Filter](frontend/src/preview/filter.png)
 
 ### 🔐 Authentication
 
 | Login | Sign Up |
 |:-----:|:-------:|
-| ![Login](src/preview/login.png) | ![Sign Up](src/preview/signup.png) |
+| ![Login](frontend/src/preview/login.png) | ![Sign Up](frontend/src/preview/signup.png) |
 
 ---
 
