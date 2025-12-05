@@ -197,7 +197,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
-Made with ❤️ by [0SAKESH0](https://github.com/0SAKESH0)
+Made with ❤️ by [selvacoder](https://github.com/selvacoder) [0SAKESH0](https://github.com/0SAKESH0)
 
 ---
 
